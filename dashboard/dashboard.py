@@ -150,8 +150,8 @@ st.pyplot(fig)
 
 st.subheader("Conclusions")
 
-st.markdown("1. Produk mana yang memiliki Revenue terbesar? Apakah product dengan harga mahal menjamin mendapatkan revenue terbesar?")
-st.markdown("Berdasarkan data yang sudah diolah dan divisualisasikan pada sheet diatas, Maka di ketahui produk dengan perolehan revenue terbesar berada pada product dengan dengan category `Bed Bath Table`. Selain itu, kita mendapatkan bahwa produk-produk yang memberikan revenue terbesar berada pada harga penjual 50-500 R$")
+st.markdown("1. Produk mana yang memiliki order terbesar? dan Produk mana yang memiliki order terkecil?")
+st.markdown("Berdasarkan data yang sudah diolah dan divisualisasikan pada sheet diatas, Maka di ketahui produk dengan perolehan order terbesar berada pada product dengan dengan category `Bed Bath Table`. Selain itu, Product dengan perolehan order terkecil berada pada product dengan category `security and services`")
 
 st.markdown("2. Bagaimana performa penjualan platform E-commerce tersebut setiap bulannya?")
 st.markdown("Berdasarkan Line Graph diatas, Penjualan pada platform E-commerce tersebut sangat fluktuatif. Akan tetapi, dapat terlihat bahwa terdapat peningkatan penjualan yang fantastis dari Bulan `September ke November`, Yakni terdapat **Puncak pembelian minimum** pada bulan `September` dan mencapai **Puncak pembelian maksimum** pada bulan `November`")
