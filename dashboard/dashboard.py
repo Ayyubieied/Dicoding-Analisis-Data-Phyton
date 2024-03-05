@@ -52,7 +52,7 @@ def create_sum_spend_df():
 sum_spend_df = create_sum_spend_df()
 
 def create_sum_order_items_df():
-    sum_order_items_df = main_df.groupby("product_category_name_translation")["product_id"].count().reset_index()
+    sum_order_items_df = main_df.groupby("product_category_name_english")["product_id"].count().reset_index()
     sum_order_items_df.rename(columns={
         "product_id": "product_count"
     }, inplace=True)
@@ -105,14 +105,14 @@ fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(45, 25))
 
 colors = ["#068DA9", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3"]
 
-sns.barplot(x="product_count", y="product_category_name_translation", data=sum_order_items_df.head(5), palette=colors, ax=ax[0])
+sns.barplot(x="product_count", y="product_category_name_english", data=sum_order_items_df.head(5), palette=colors, ax=ax[0])
 ax[0].set_ylabel(None)
 ax[0].set_xlabel("Number of Sales", fontsize=30)
 ax[0].set_title("Produk paling banyak terjual", loc="center", fontsize=50)
 ax[0].tick_params(axis ='y', labelsize=35)
 ax[0].tick_params(axis ='x', labelsize=30)
 
-sns.barplot(x="product_count", y="product_category_name_translation", data=sum_order_items_df.sort_values(by="product_count", ascending=True).head(5), palette=colors, ax=ax[1])
+sns.barplot(x="product_count", y="product_category_name_english", data=sum_order_items_df.sort_values(by="product_count", ascending=True).head(5), palette=colors, ax=ax[1])
 ax[1].set_ylabel(None)
 ax[1].set_xlabel("Number of Sales", fontsize=30)
 ax[1].invert_xaxis()
