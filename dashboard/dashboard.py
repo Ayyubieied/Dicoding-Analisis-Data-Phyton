@@ -23,31 +23,30 @@ max_date = all_df["order_approved_at"].max()
 main_df = all_df[(all_df["order_approved_at"] >= str(min_date)) & 
                  (all_df["order_approved_at"] <= str(max_date))]
 
-def create_daily_orders_df():
-        daily_orders_df = main_df.resample(rule='D', on='order_approved_at').agg({
-            "order_id": "nunique",
-            "payment_value": "sum"
-        })
-        daily_orders_df = daily_orders_df.reset_index()
-        daily_orders_df.rename(columns={
-            "order_id": "order_count",
-            "payment_value": "revenue"
-        }, inplace=True)
-        
-        return daily_orders_df
+def create_monthly_orders_df():
+    monthly_orders_df = main_df.resample(rule='M', on='order_approved_at').agg({
+        "order_id": "nunique",
+        "payment_value": "sum"
+    })
+    monthly_orders_df = monthly_orders_df.reset_index()
+    monthly_orders_df.rename(columns={
+        "order_id": "order_count",
+        "payment_value": "revenue"
+    }, inplace=True)
+    
+    return monthly_orders_df
 
-daily_orders_df = create_daily_orders_df()
+monthly_orders_df = create_monthly_orders_df()
 
 def create_sum_spend_df():
-        sum_spend_df = main_df.resample(rule='D', on='order_approved_at').agg({
-            "payment_value": "sum"
-        })
-        sum_spend_df = sum_spend_df.reset_index()
-        sum_spend_df.rename(columns={
-            "payment_value": "total_spend"
-        }, inplace=True)
-
-        return sum_spend_df
+    sum_spend_df = main_df.resample(rule='D', on='order_approved_at').agg({
+        "payment_value": "sum"
+    })
+    sum_spend_df = sum_spend_df.reset_index()
+    sum_spend_df.rename(columns={
+        "payment_value": "total_spend"
+    }, inplace=True)
+    return sum_spend_df
 
 sum_spend_df = create_sum_spend_df()
 
@@ -65,22 +64,22 @@ sum_order_items_df = create_sum_order_items_df()
 st.header("Brazilian E-Commerce Public Dataset Analysis")
 
 # Daily Orders
-st.subheader("Daily Orders")
+st.subheader("Monthly Orders")
 
 col1, col2 = st.columns(2)
 
 with col1:
-    total_order = daily_orders_df["order_count"].sum()
+    total_order = monthly_orders_df["order_count"].sum()
     st.markdown(f"Total Order: **{total_order}**")
 
 with col2:
-    total_revenue = format_currency(daily_orders_df["revenue"].sum(), "IDR", locale="id_ID")
+    total_revenue = format_currency(monthly_orders_df["revenue"].sum(), "IDR", locale="id_ID")
     st.markdown(f"Total Revenue: **{total_revenue}**")
 
 fig, ax = plt.subplots(figsize=(12, 6))
 ax.plot(
-    sum_spend_df["order_approved_at"],
-    sum_spend_df["total_spend"],
+    monthly_orders_df["order_approved_at"],
+    monthly_orders_df["revenue"],
     marker="o",
     linewidth=2,
     color="#90CAF9"
