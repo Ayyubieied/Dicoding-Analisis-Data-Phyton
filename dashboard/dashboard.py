@@ -89,6 +89,30 @@ ax.tick_params(axis="x", rotation=45)
 ax.tick_params(axis="y", labelsize=15)
 st.pyplot(fig)
 
+# Customer Spend Money
+st.subheader("Customer Spend Money")
+col1, col2 = st.columns(2)
+
+with col1:
+    total_spend = format_currency(sum_spend_df["total_spend"].sum(), "IDR", locale="id_ID")
+    st.markdown(f"Total Spend: **{total_spend}**")
+
+with col2:
+    avg_spend = format_currency(sum_spend_df["total_spend"].mean(), "IDR", locale="id_ID")
+    st.markdown(f"Average Spend: **{avg_spend}**")
+
+fig, ax = plt.subplots(figsize=(12, 6))
+ax.plot(
+    sum_spend_df["order_approved_at"],
+    sum_spend_df["total_spend"],
+    marker="o",
+    linewidth=2,
+    color="#90CAF9"
+)
+ax.tick_params(axis="x", rotation=45)
+ax.tick_params(axis="y", labelsize=15)
+st.pyplot(fig)
+
 # Order Items
 st.subheader("Order Items")
 col1, col2 = st.columns(2)
