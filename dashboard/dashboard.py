@@ -23,8 +23,8 @@ max_date = all_df["order_approved_at"].max()
 main_df = all_df[(all_df["order_approved_at"] >= str(min_date)) & 
                  (all_df["order_approved_at"] <= str(max_date))]
 
-def create_daily_orders_df(self):
-        daily_orders_df = self.df.resample(rule='D', on='order_approved_at').agg({
+def create_daily_orders_df():
+        daily_orders_df = main_df.resample(rule='D', on='order_approved_at').agg({
             "order_id": "nunique",
             "payment_value": "sum"
         })
@@ -38,8 +38,8 @@ def create_daily_orders_df(self):
 
 daily_orders_df = create_daily_orders_df()
 
-def create_sum_spend_df(self):
-        sum_spend_df = self.df.resample(rule='D', on='order_approved_at').agg({
+def create_sum_spend_df():
+        sum_spend_df = main_df.resample(rule='D', on='order_approved_at').agg({
             "payment_value": "sum"
         })
         sum_spend_df = sum_spend_df.reset_index()
@@ -51,8 +51,8 @@ def create_sum_spend_df(self):
 
 sum_spend_df = create_sum_spend_df()
 
-def create_sum_order_items_df(self):
-    sum_order_items_df = self.df.groupby("product_category_name_english")["product_id"].count().reset_index()
+def create_sum_order_items_df():
+    sum_order_items_df = main_df.groupby("product_category_name_english")["product_id"].count().reset_index()
     sum_order_items_df.rename(columns={
         "product_id": "product_count"
     }, inplace=True)
