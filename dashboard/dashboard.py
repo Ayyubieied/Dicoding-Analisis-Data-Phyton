@@ -36,7 +36,7 @@ def create_daily_orders_df(self):
         
         return daily_orders_df
 
-daily_orders_df = function.create_daily_orders_df()
+daily_orders_df = create_daily_orders_df()
 
 def create_sum_spend_df(self):
         sum_spend_df = self.df.resample(rule='D', on='order_approved_at').agg({
@@ -49,7 +49,7 @@ def create_sum_spend_df(self):
 
         return sum_spend_df
 
-sum_spend_df = function.create_sum_spend_df()
+sum_spend_df = create_sum_spend_df()
 
 def create_sum_order_items_df(self):
     sum_order_items_df = self.df.groupby("product_category_name_english")["product_id"].count().reset_index()
@@ -58,6 +58,8 @@ def create_sum_order_items_df(self):
     }, inplace=True)
     sum_order_items_df = sum_order_items_df.sort_values(by='product_count', ascending=False)
     return sum_order_items_df
+
+sum_order_items_df = create_sum_order_items_df()
 
 # Title
 st.header("Brazilian E-Commerce Public Dataset Analysis")
