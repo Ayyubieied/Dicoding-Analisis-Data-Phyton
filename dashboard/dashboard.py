@@ -38,17 +38,17 @@ def create_monthly_orders_df():
 
 monthly_orders_df = create_monthly_orders_df()
 
-def create_sum_spend_df():
-    sum_spend_df = main_df.resample(rule='D', on='order_approved_at').agg({
+def create_monthly_spend_df():
+    monthly_spend_df = main_df.resample(rule='M', on='order_approved_at').agg({
         "payment_value": "sum"
     })
-    sum_spend_df = sum_spend_df.reset_index()
-    sum_spend_df.rename(columns={
+    monthly_spend_df = monthly_spend_df.reset_index()
+    monthly_spend_df.rename(columns={
         "payment_value": "total_spend"
     }, inplace=True)
-    return sum_spend_df
+    return monthly_spend_df
 
-sum_spend_df = create_sum_spend_df()
+monthly_spend_df = create_monthly_spend_df()
 
 def create_sum_order_items_df():
     sum_order_items_df = main_df.groupby("product_category_name_english")["product_id"].count().reset_index()
@@ -89,21 +89,21 @@ ax.tick_params(axis="y", labelsize=15)
 st.pyplot(fig)
 
 # Customer Spend Money
-st.subheader("Customer Spend Money")
+st.subheader("Monthly Customer Spend Money")
 col1, col2 = st.columns(2)
 
 with col1:
-    total_spend = format_currency(sum_spend_df["total_spend"].sum(), "IDR", locale="id_ID")
+    total_spend = format_currency(monthly_spend_df["total_spend"].sum(), "IDR", locale="id_ID")
     st.markdown(f"Total Spend: **{total_spend}**")
 
 with col2:
-    avg_spend = format_currency(sum_spend_df["total_spend"].mean(), "IDR", locale="id_ID")
+    avg_spend = format_currency(monthly_spend_df["total_spend"].mean(), "IDR", locale="id_ID")
     st.markdown(f"Average Spend: **{avg_spend}**")
 
 fig, ax = plt.subplots(figsize=(12, 6))
 ax.plot(
-    sum_spend_df["order_approved_at"],
-    sum_spend_df["total_spend"],
+    monthly_spend_df["order_approved_at"],
+    monthly_spend_df["total_spend"],
     marker="o",
     linewidth=2,
     color="#90CAF9"
@@ -146,3 +146,15 @@ ax[1].tick_params(axis='y', labelsize=35)
 ax[1].tick_params(axis='x', labelsize=30)
 
 st.pyplot(fig)
+
+
+st.subheader("Conclusions")
+
+st.markdown("1. Produk mana yang memiliki Revenue terbesar? Apakah product dengan harga mahal menjamin mendapatkan revenue terbesar?")
+st.markdown("Berdasarkan data yang sudah diolah dan divisualisasikan pada sheet diatas, Maka di ketahui produk dengan perolehan revenue terbesar berada pada product dengan dengan category `Bed Bath Table`. Selain itu, kita mendapatkan bahwa produk-produk yang memberikan revenue terbesar berada pada harga penjual 50-500 R$")
+
+st.markdown("2. Bagaimana performa penjualan platform E-commerce tersebut setiap bulannya?")
+st.markdown("Berdasarkan Line Graph diatas, Penjualan pada platform E-commerce tersebut sangat fluktuatif. Akan tetapi, dapat terlihat bahwa terdapat peningkatan penjualan yang fantastis dari Bulan `September ke November`, Yakni terdapat **Puncak pembelian minimum** pada bulan `September` dan mencapai **Puncak pembelian maksimum** pada bulan `November`")
+
+st.markdown("3. Berapa pengeluaran customer pada platform E-commerce dalam beberapa bulan terakhir?")
+st.markdown("Berdasarkan data yang kita dapatkan dari pertanyaan sebelumnya, terdapat hubungan yang erat antara **Performa penjualan setiap bulan** dengan **pengeluaran customer beberapa bulan terakhir** dimana grafik yang ditujukan `Hampir Sama secara keseluruhan` antara satu sama lain yang mengartikan jumlah total pengeluaran customer sama dengan jumlah total pembelian produk setiap bulannya")
