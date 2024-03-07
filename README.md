@@ -24,12 +24,14 @@ Kaggle Dataset brazilian-ecommerce [(Link Download)](https://www.kaggle.com/data
    ```shell
    git clone https://github.com/Ayyubieied/Dicoding-Analisis-Data-Phyton.git
    ```
-2. Pastikan Anda memiliki lingkungan Python yang sesuai dan pustaka-pustaka yang diperlukan. Anda dapat menginstal pustaka-pustaka tersebut dengan menjalankan perintah berikut:
-
-   ```shell
-   pip install streamlit
-   pip install -r dashboard/requirements.txt
-   ```
+2. Go to the project directory
+```
+cd dicoding-analisis-data-phyton
+```
+3. Install the required Python packages by running:
+```
+pip install -r requirements.txt
+```
 
 ## Penggunaan
 
@@ -41,5 +43,8 @@ Kaggle Dataset brazilian-ecommerce [(Link Download)](https://www.kaggle.com/data
    ```
 
 Atau bisa dengan kunjungi website ini [Project Data Analytics](https://dcdmpw57hl8sm8em9kkbav.streamlit.app/)
+<<<<<<< HEAD
 
+=======
+>>>>>>> 33ba3c47b44ce41c2b12c2049aedeba927b0368a
    
