@@ -63,6 +63,41 @@ sum_order_items_df = create_sum_order_items_df()
 # Title
 st.header("Brazilian E-Commerce Public Dataset Analysis")
 
+# Order Items
+st.subheader("Order Items")
+col1, col2 = st.columns(2)
+
+with col1:
+    total_items = sum_order_items_df["product_count"].sum()
+    st.markdown(f"Total Items: **{total_items}**")
+
+with col2:
+    avg_items = sum_order_items_df["product_count"].mean()
+    st.markdown(f"Average Items: **{avg_items}**")
+
+fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(45, 25))
+
+colors = ["#068DA9", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3"]
+
+sns.barplot(x="product_count", y="product_category_name_english", data=sum_order_items_df.head(5), palette=colors, ax=ax[0])
+ax[0].set_ylabel(None)
+ax[0].set_xlabel("Number of Sales", fontsize=30)
+ax[0].set_title("Produk paling banyak terjual", loc="center", fontsize=50)
+ax[0].tick_params(axis ='y', labelsize=35)
+ax[0].tick_params(axis ='x', labelsize=30)
+
+sns.barplot(x="product_count", y="product_category_name_english", data=sum_order_items_df.sort_values(by="product_count", ascending=True).head(5), palette=colors, ax=ax[1])
+ax[1].set_ylabel(None)
+ax[1].set_xlabel("Number of Sales", fontsize=30)
+ax[1].invert_xaxis()
+ax[1].yaxis.set_label_position("right")
+ax[1].yaxis.tick_right()
+ax[1].set_title("Produk paling sedikit terjual", loc="center", fontsize=50)
+ax[1].tick_params(axis='y', labelsize=35)
+ax[1].tick_params(axis='x', labelsize=30)
+
+st.pyplot(fig)
+
 # Daily Orders
 st.subheader("Monthly Orders")
 
@@ -110,41 +145,6 @@ ax.plot(
 )
 ax.tick_params(axis="x", rotation=45)
 ax.tick_params(axis="y", labelsize=15)
-st.pyplot(fig)
-
-# Order Items
-st.subheader("Order Items")
-col1, col2 = st.columns(2)
-
-with col1:
-    total_items = sum_order_items_df["product_count"].sum()
-    st.markdown(f"Total Items: **{total_items}**")
-
-with col2:
-    avg_items = sum_order_items_df["product_count"].mean()
-    st.markdown(f"Average Items: **{avg_items}**")
-
-fig, ax = plt.subplots(nrows=1, ncols=2, figsize=(45, 25))
-
-colors = ["#068DA9", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3"]
-
-sns.barplot(x="product_count", y="product_category_name_english", data=sum_order_items_df.head(5), palette=colors, ax=ax[0])
-ax[0].set_ylabel(None)
-ax[0].set_xlabel("Number of Sales", fontsize=30)
-ax[0].set_title("Produk paling banyak terjual", loc="center", fontsize=50)
-ax[0].tick_params(axis ='y', labelsize=35)
-ax[0].tick_params(axis ='x', labelsize=30)
-
-sns.barplot(x="product_count", y="product_category_name_english", data=sum_order_items_df.sort_values(by="product_count", ascending=True).head(5), palette=colors, ax=ax[1])
-ax[1].set_ylabel(None)
-ax[1].set_xlabel("Number of Sales", fontsize=30)
-ax[1].invert_xaxis()
-ax[1].yaxis.set_label_position("right")
-ax[1].yaxis.tick_right()
-ax[1].set_title("Produk paling sedikit terjual", loc="center", fontsize=50)
-ax[1].tick_params(axis='y', labelsize=35)
-ax[1].tick_params(axis='x', labelsize=30)
-
 st.pyplot(fig)
 
 

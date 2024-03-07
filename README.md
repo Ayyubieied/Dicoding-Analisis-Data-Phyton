@@ -33,4 +33,13 @@ Kaggle Dataset brazilian-ecommerce [(Link Download)](https://www.kaggle.com/data
 
 ## Penggunaan
 
+1. Masuk ke direktori proyek (Local):
+
+   ```shell
+   cd dicoding-analisis-data-phyton/dashboard/
+   streamlit run dashboard.py
+   ```
+
+Atau bisa dengan kunjungi website ini [Project Data Analytics](https://dcdmpw57hl8sm8em9kkbav.streamlit.app/)
+
    
