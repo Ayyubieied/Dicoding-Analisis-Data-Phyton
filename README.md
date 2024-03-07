@@ -43,8 +43,4 @@ pip install -r requirements.txt
    ```
 
 Atau bisa dengan kunjungi website ini [Project Data Analytics](https://dcdmpw57hl8sm8em9kkbav.streamlit.app/)
-<<<<<<< HEAD
-
-=======
->>>>>>> 33ba3c47b44ce41c2b12c2049aedeba927b0368a
    
